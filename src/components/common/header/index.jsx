@@ -1,6 +1,6 @@
 import { useMatches } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Profiles } from "../index.js";
+import { Profiles, Search } from "../index.js";
 import { Buttons } from "../../buttons";
 const Header = () => {
   const user = useSelector((state) => state.user);
@@ -9,11 +9,11 @@ const Header = () => {
   if (user.fullName === null && pathname === "/") {
     return (
       <>
-        <div className=" w-full bg-black pt-6 mt-0 ">
-          <div></div>
-          <div className="flex justify-end">
-            <Buttons />
+        <div className=" w-full  pt-6 mt-0 ">
+          <div className="border border-orange-600 flex justify w-80" >
+            <Search className="flex justify-center" />
           </div>
+          <Buttons />
         </div>
       </>
     );

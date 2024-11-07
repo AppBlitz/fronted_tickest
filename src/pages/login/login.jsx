@@ -1,46 +1,78 @@
-import { Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { instance } from "../../utils/api/instance/instance.js";
-import { useDispatch } from "react-redux";
-import { userSlice } from "../../redux";
+import { /* useSelector, */ useDispatch } from "react-redux";
+import { addUser } from "../../redux/slice/userSlice.js";
+import { users } from "../../utils/api/user.js";
+import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Login = () => {
+  const [loading, setLoading] = React.useState(false);
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const { addUser } = userSlice;
+  const navigate = useNavigate();
+  // const use = useSelector((state) => state.user)
   const searchUser = (loginUser) => {
-    instance({
-      method: "POST",
-      url: "/users/login",
-      data: {
-        loginUser,
-      },
-    }).then((answer) => {
-      if (answer.data) {
+    setLoading(true);
+    users
+      .getLogin("/login", loginUser)
+      .then((answer) => {
         dispatch(addUser(answer.data));
-      }
-    });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
-    <>
-      <div>
-        <form onSubmit={handleSubmit(searchUser)}>
-          <div>
-            <label>Correo eléctronico</label>
-            <Input type="email" {...register("email", { required: true })} />
-          </div>
-          <div>
-            <label>Contraseña</label>
-            <Input
-              type="password"
-              {...register("password", { required: true })}
-            />
-          </div>
-          <button>Ingresar</button>
-        </form>
+    <div>
+      <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-300 to-blue-500">
+        <div className="bg-white text-gray-800 p-8 rounded-xl shadow-lg max-w-sm w-full">
+          <form onSubmit={handleSubmit(searchUser)} className="space-y-6">
+            <div>
+              <label className="text-sm font-semibold text-gray-700">
+                Correo electrónico
+              </label>
+              <Input
+                type="email"
+                {...register("email", {
+                  required: "El correo eléctronico es obligatorio",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: "Correo electrónico no válido",
+                  },
+                })}
+                className="w-full border border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold text-gray-700">
+                Contraseña
+              </label>
+              <Input
+                type="password"
+                {...register("password", { required: true })}
+                className="w-full border border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {loading ? "...Cargando" : "Ingresar"}
+            </Button>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
+
 export { Login };
