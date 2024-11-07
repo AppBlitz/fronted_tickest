@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@nextui-org/react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { users } from "../../utils/api/user.js";
 const Profile = () => {
-  const user = useDispatch((state) => state.user);
+  const user = useSelector((state) => state.user);
   const { handleSubmit } = useForm();
-  React.useEffect(() => { }, [user]);
+  React.useEffect(() => { }, [user]); /* Volver a ahcer el llamado al backend para que traiga al usuario */
   const updateUser = (updateUser) => {
     users.updateUsers("", updateUser);
   };
