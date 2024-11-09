@@ -1,5 +1,5 @@
-export { Register } from "./register/Regsiter.jsx";
-export { Login } from "./login/login.jsx";
+export { Register } from "./register";
+export { Login } from "./login";
 export { DescriptionEvent } from "./eventsDescription";
 export { Profile } from "./profile";
 export { Events } from "./event";

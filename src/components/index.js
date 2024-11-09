@@ -1,2 +1,2 @@
-export { Cards } from "./card/card.jsx";
+export { Cards } from "./card";
 export { Profiles, Header, Search } from "./common";
