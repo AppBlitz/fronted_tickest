@@ -5,6 +5,8 @@ const user = {
   password: null,
   email: null,
   phoneNumber: null,
+  address: null,
+  rol: null,
 };
 const initialState = user;
 
@@ -13,11 +15,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      const { fullName, password, email, phoneNumber } = action.payload;
+      const { fullName, password, email, phoneNumber, address, rol } =
+        action.payload;
       state.fullName = fullName;
       state.email = email;
       state.password = password;
       state.phoneNumber = phoneNumber;
+      state.address = address;
+      state.rol = rol;
     },
   },
 });

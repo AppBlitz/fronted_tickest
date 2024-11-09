@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { Input, Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { /* useSelector, */ useDispatch } from "react-redux";
@@ -11,13 +12,27 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const example = (user) => {
+    console.log(user);
+    const users = {
+      fullName: user.nombre,
+      address: user.address,
+      rol: user.rol,
+      email: user.sub,
+      phoneNumber: user.phone,
+      id: user.id,
+      password: user.password,
+    };
+    dispatch(addUser(users));
+  };
   // const use = useSelector((state) => state.user)
   const searchUser = (loginUser) => {
     setLoading(true);
     users
       .getLogin("/login", loginUser)
       .then((answer) => {
-        dispatch(addUser(answer.data));
+        const token = jwtDecode(answer.data.respuesta.Token);
+        console.log(example(token));
         navigate("/");
       })
       .catch((error) => {

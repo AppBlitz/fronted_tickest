@@ -1,18 +1,16 @@
 import { Input, Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { users } from "../../utils/api/user.js";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/slice/userSlice.js";
 const Register = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
   const registerUser = (user) => {
     users
       .addUser("/user/add", user)
       .then((answer) => {
-        {
-          answer.data && dispatch(addUser(answer.data));
-        }
+        console.log(answer);
+        navigate("/code/validator");
       })
       .catch((error) => {
         console.error(error);

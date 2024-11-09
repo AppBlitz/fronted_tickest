@@ -8,10 +8,22 @@ const users = {
     return instance.get(endpoint + add);
   },
   addUser: function (add, user) {
-    return instance.post(endpoint + add, user);
+    return instance.post(endpoint + add, {
+      email: user.email,
+      password: user.password,
+      fullName: user.fullName,
+      address: user.address,
+      state: "ASSET",
+      phoneNumber: user.phoneNumber,
+      identificationNumber: user.identificationNumber,
+      rol: "USER"
+    });
   },
   getLogin: function (add, userLogin) {
-    return instance.post(endpoint + add, userLogin);
+    return instance.post(endpoint + add, {
+      email: userLogin.email,
+      password: userLogin.password
+    });
   },
   updateUsers: function (add, updateUser) {
     return instance.post(endpoint + add, updateUser);

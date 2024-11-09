@@ -22,8 +22,7 @@ const Profiles = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         src={`${user.image ? user.image : undefined}`}
-        //WARNING: mejorar esto para cuando exista un usuario
-        {...(!user.image && stringAvatar("Carlos Fabian "))}
+        {...(!user.image && stringAvatar(user.fullName))}
       />
       <Menu
         id="account"
@@ -63,6 +62,7 @@ const Profiles = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={() => navigate(`${"/profile"}`)}>Perfil</MenuItem>
+        {user.rol === "ADMINISTRATION" && <MenuItem>Eventos</MenuItem>}
         <MenuItem onClick={handleClose}>Cerrar sesión</MenuItem>
       </Menu>
     </>

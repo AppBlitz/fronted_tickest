@@ -1,47 +1,51 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@nextui-org/react";
-import { useSelector, useDispatch } from "react-redux";
+import { Button, Input } from "@nextui-org/react";
+import { useSelector } from "react-redux";
 import { users } from "../../utils/api/user.js";
+import { Profiles } from "../../components";
 const Profile = () => {
   const user = useSelector((state) => state.user);
+  console.log(user);
   const { handleSubmit } = useForm();
-  React.useEffect(() => { }, [user]); /* Volver a ahcer el llamado al backend para que traiga al usuario */
+  React.useEffect(() => { }, [user]);
   const updateUser = (updateUser) => {
-    users.updateUsers("", updateUser);
+    users.updateUsers("/", updateUser);
   };
   return (
     <>
       <div>
-        <a>Perfil</a>
+        <Profiles />
       </div>
       <div>
         <div>
           <form onSubmit={handleSubmit(updateUser)}>
             <div>
               <label>Nombre completo</label>
-              <Input defaultValue="Carlos Fabian Corrales Zapata" />
+              <Input defaultValue={`${user.fullName}`} />
             </div>
             <div>
               <label>Correo eléctronico</label>
-              <Input defaultValue="carl@gmail.com" />
+              <Input defaultValue={`${user.email}`} />
             </div>
             <div>
               <label>Dirección de residencia</label>
-              <Input defaultValue="manzana I casa 13" />
+              <Input defaultValue={`${user.address}`} />
             </div>
             <div>
-              <label>telefonico</label>
-              <Input defaultValue="3015553432" />
+              <label>Telefono</label>
+              <Input defaultValue={`${user.phoneNumber}`} />
             </div>
             <div>
               <label>Contraseña</label>
-              <Input defaultValue="Contraseña" />
+              <Input defaultValue={`${"No se"}`} />
             </div>
             <div>
-              <label>Estado</label>
-              <Input defaultValue="Activa" />
+              <label>Rol</label>
+              <Input defaultValue={`${user.rol === "USER" && "Usuario"}`} />
             </div>
+            <Button type="submit">Actualizar</Button>
+            <Button type="submit">Eliminar</Button>
           </form>
         </div>
       </div>

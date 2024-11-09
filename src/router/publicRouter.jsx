@@ -1,5 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Events, Login, Register, DescriptionEvent, Profile } from "../pages";
+import {
+  PagineError,
+  CodeValidator,
+  Events,
+  Login,
+  Register,
+  DescriptionEvent,
+  Profile,
+} from "../pages";
 import { Header } from "../components";
 
 const router = createBrowserRouter([
@@ -16,7 +24,7 @@ const router = createBrowserRouter([
     element: <DescriptionEvent />,
   },
   {
-    path: "example",
+    path: "/example",
     element: <Header />,
   },
   {
@@ -29,7 +37,11 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <h1>Error</h1>,
+    element: <PagineError />,
+  },
+  {
+    path: "/code/validator/:id",
+    element: <CodeValidator />,
   },
 ]);
 

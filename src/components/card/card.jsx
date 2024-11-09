@@ -7,7 +7,7 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 const Cards = (props) => {
   const navigate = useNavigate();
   return (
@@ -24,8 +24,12 @@ const Cards = (props) => {
         <Typography>{props.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button fullwidth="true" variant="contained" size="small" onClick={() => navigate("events/1")}>
-          {" "}
+        <Button
+          fullwidth="true"
+          variant="contained"
+          size="small"
+          onClick={() => navigate("events/1")}
+        >
           learn more
         </Button>
       </CardActions>
