@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { events } from "../../utils/api";
-// import Grid from "@mui/material/Gridv2"
+import { events } from "../../utils";
 import { Container, Box, } from "@mui/material"
 const DescriptionEvent = () => {
   const { id } = useParams();

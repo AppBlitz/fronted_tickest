@@ -12,27 +12,27 @@ import { Header } from "../components";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "login",
     element: <Login />,
   },
   {
-    path: "/register",
+    path: "register",
     element: <Register />,
   },
   {
-    path: "/events/:id",
+    path: "events/:id",
     element: <DescriptionEvent />,
   },
   {
-    path: "/example",
+    path: "example",
     element: <Header />,
   },
   {
-    path: "/profile",
+    path: "profile",
     element: <Profile />,
   },
   {
-    path: "/",
+    path: "",
     element: <Events />,
   },
   {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     element: <PagineError />,
   },
   {
-    path: "/code/validator/:id",
+    path: "code/validator/:id",
     element: <CodeValidator />,
   },
 ]);

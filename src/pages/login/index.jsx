@@ -3,8 +3,9 @@ import { Input, Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { /* useSelector, */ useDispatch } from "react-redux";
 import { addUser } from "../../redux/slice/userSlice.js";
-import { users } from "../../utils/api/user.js";
+import { users } from "../../utils";
 import { useNavigate } from "react-router-dom";
+import { setItem } from "../../utils"
 import React from "react";
 
 const Login = () => {
@@ -23,6 +24,7 @@ const Login = () => {
       id: user.id,
       password: user.password,
     };
+    setItem("user", users)
     dispatch(addUser(users));
   };
   // const use = useSelector((state) => state.user)
@@ -32,7 +34,7 @@ const Login = () => {
       .getLogin("/login", loginUser)
       .then((answer) => {
         const token = jwtDecode(answer.data.respuesta.Token);
-        console.log(example(token));
+        example(token);
         navigate("/");
       })
       .catch((error) => {

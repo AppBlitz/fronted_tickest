@@ -6,7 +6,7 @@ const Buttons = () => {
   return (<>
     <Grid container spacing={2} className=" w-48 ">
       <Button className="" variant="outlined" size="small" onClick={() => navigate("/login")}>sesión</Button>
-      <Button className="" variant="outlined" size="small" className="" onClick={() => navigate("/register")}>Registro</Button>
+      <Button className="" variant="outlined" size="small" onClick={() => navigate("/register")}>Registro</Button>
     </Grid>
   </>);
 }

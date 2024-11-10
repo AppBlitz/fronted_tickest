@@ -1,18 +1,25 @@
 import React from "react";
 import { MenuItem, Menu, Avatar } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { removeUser } from "../../../redux/slice/userSlice.js"
+import { setItem } from "../../../utils"
 const Profiles = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+    dispatch(removeUser(user.id));
+    setItem("user", "")
   };
+
   return (
     <>
       <Avatar
@@ -21,8 +28,7 @@ const Profiles = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        src={`${user.image ? user.image : undefined}`}
-        {...(!user.image && stringAvatar(user.fullName))}
+        {...(user.fullName && stringAvatar(user.fullName))}
       />
       <Menu
         id="account"

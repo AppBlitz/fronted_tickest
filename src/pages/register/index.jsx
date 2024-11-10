@@ -1,7 +1,7 @@
 import { Input, Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { users } from "../../utils/api/user.js";
+import { users } from "../../utils";
 const Register = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();

@@ -6,7 +6,7 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const matches = useMatches().at();
   const { pathname } = matches;
-  if (user.fullName === null && pathname === "/") {
+  if (user.fullName === null & pathname === "/") {
     return (
       <>
         <div className=" w-full  pt-6 mt-0 ">
