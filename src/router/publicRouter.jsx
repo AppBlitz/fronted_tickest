@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import {
+  PasswordRecovery,
+  CreateEvent,
   PagineError,
   CodeValidator,
   Events,
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
   {
     path: "code/validator/:id",
     element: <CodeValidator />,
+  },
+  {
+    path: "create/event",
+    element: <CreateEvent />,
+  },
+  {
+    path: "password/recovery",
+    element: <PasswordRecovery />,
   },
 ]);
 

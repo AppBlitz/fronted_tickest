@@ -6,3 +6,4 @@ export { Events } from "./event";
 export { CodeValidator } from "./codeValidator";
 export { PagineError } from "./pagineError";
 export { CreateEvent } from "./createEvent";
+export { PasswordRecovery } from "./passwordRecovery";

@@ -26,7 +26,18 @@ const users = {
     });
   },
   updateUsers: function (add, updateUser) {
-    return instance.post(endpoint + add, updateUser);
+    return instance.post(endpoint + add, {
+      id: updateUser.id,
+      nameFull: updateUser.nameFull,
+      address: updateUser.address,
+      password: updateUser.password,
+      phoneNumber: updateUser.phoneNumber,
+      identificationNumber: updateUser.identificationNumber
+    });
+  },
+  recoveryPassword: function (add, email) {
+    return instance.get(endpoint + add + email);
+
   },
 };
 export { users };

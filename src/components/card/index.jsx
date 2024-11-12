@@ -28,7 +28,7 @@ const Cards = (props) => {
           fullwidth="true"
           variant="contained"
           size="small"
-          onClick={() => navigate("events/1")}
+          onClick={() => navigate(`/events/${props.id}`)}
         >
           learn more
         </Button>

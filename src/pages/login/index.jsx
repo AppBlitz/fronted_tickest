@@ -5,7 +5,7 @@ import { /* useSelector, */ useDispatch } from "react-redux";
 import { addUser } from "../../redux/slice/userSlice.js";
 import { users } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import { setItem } from "../../utils"
+import { setItem } from "../../utils";
 import React from "react";
 
 const Login = () => {
@@ -24,7 +24,7 @@ const Login = () => {
       id: user.id,
       password: user.password,
     };
-    setItem("user", users)
+    setItem("user", users);
     dispatch(addUser(users));
   };
   // const use = useSelector((state) => state.user)
@@ -77,7 +77,14 @@ const Login = () => {
                 className="w-full border border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
+            <div>
+              <a
+                onClick={() => navigate("/password/recovery")}
+                className="text-blue-500 hover:cursor-pointer"
+              >
+                ¿Recuperar contraseña?
+              </a>
+            </div>
             <Button
               type="submit"
               disabled={loading}

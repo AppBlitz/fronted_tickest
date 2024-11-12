@@ -1,9 +1,8 @@
-import React from "react"
-import { Header, Cards } from "../../components"
-import Grid from "@mui/material/Grid2"
+import React from "react";
+import { Header, Cards } from "../../components";
+import Grid from "@mui/material/Grid2";
 
 const Events = () => {
-
   const [event, setEvent] = React.useState([]);
   const events = [
     {
@@ -55,6 +54,7 @@ const Events = () => {
                 comments={""}
                 image={event.imagenEvent[0]}
                 description={event.description}
+                id={event.id}
               ></Cards>
             </Grid>
           ))}
@@ -62,5 +62,5 @@ const Events = () => {
       </div>
     </>
   );
-}
-export { Events }
+};
+export { Events };
