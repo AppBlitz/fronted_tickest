@@ -50,8 +50,8 @@ const Events = () => {
                 nameEvent={event.nameEvent}
                 price={1000}
                 stock={100}
-                ubication={"Cordoba"}
-                comments={""}
+                ubication={event.location}
+                comments={event.comments}
                 image={event.imagenEvent[0]}
                 description={event.description}
                 id={event.id}
