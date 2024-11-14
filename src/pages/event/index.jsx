@@ -1,42 +1,17 @@
 import React from "react";
 import { Header, Cards } from "../../components";
+import { events } from "../../utils";
 import Grid from "@mui/material/Grid2";
 
 const Events = () => {
   const [event, setEvent] = React.useState([]);
-  const events = [
-    {
-      nameEvent: "Basketball",
-      imagenEvent: ["https://nextui.org/images/hero-card-complete.jpeg"],
-      description: "El evento es algo",
-    },
-
-    {
-      nameEvent: "Basketball",
-      imagenEvent: ["https://nextui.org/images/hero-card-complete.jpeg"],
-      description: "El evento es algo",
-    },
-
-    {
-      nameEvent: "Basketball",
-      imagenEvent: ["https://nextui.org/images/hero-card-complete.jpeg"],
-      description: "El evento es algo",
-    },
-
-    {
-      nameEvent: "Basketball",
-      imagenEvent: ["https://nextui.org/images/hero-card-complete.jpeg"],
-      description: "El evento es algo",
-    },
-
-    {
-      nameEvent: "Basketball",
-      imagenEvent: ["https://nextui.org/images/hero-card-complete.jpeg"],
-      description: "El evento es algo",
-    },
-  ];
   React.useEffect(() => {
-    setEvent(events);
+    events.getAll("/findAllEvents").then((answer) => {
+      if (answer.status == 200) {
+        console.log(answer);
+        setEvent(answer.data);
+      }
+    });
   }, []);
   return (
     <>
@@ -52,9 +27,9 @@ const Events = () => {
                 stock={100}
                 ubication={event.location}
                 comments={event.comments}
-                image={event.imagenEvent[0]}
                 description={event.description}
                 id={event.id}
+                image={event.imageEvent[0]}
               ></Cards>
             </Grid>
           ))}

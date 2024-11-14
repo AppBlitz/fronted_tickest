@@ -33,9 +33,12 @@ const Login = () => {
     users
       .getLogin("/login", loginUser)
       .then((answer) => {
-        const token = jwtDecode(answer.data.respuesta.Token);
-        example(token);
-        navigate("/");
+        if (answer.status == 200) {
+          setItem("token", answer.data.respuesta.Token);
+          const token = jwtDecode(answer.data.respuesta.Token);
+          example(token);
+          navigate("/event");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -93,6 +96,13 @@ const Login = () => {
               {loading ? "...Cargando" : "Ingresar"}
             </Button>
           </form>
+          <br />
+          <a
+            className="flex justify-center text-blue-500"
+            onClick={() => navigate("/register")}
+          >
+            {"Crear cuenta"}
+          </a>
         </div>
       </div>
     </div>

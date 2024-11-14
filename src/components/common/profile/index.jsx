@@ -2,11 +2,11 @@ import React from "react";
 import { MenuItem, Menu, Avatar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeUser } from "../../../redux/slice/userSlice.js"
-import { setItem } from "../../../utils"
+import { removeUser } from "../../../redux/slice/userSlice.js";
+import { setItem } from "../../../utils";
 const Profiles = () => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -17,7 +17,8 @@ const Profiles = () => {
   const handleClose = () => {
     setAnchorEl(null);
     dispatch(removeUser(user.id));
-    setItem("user", "")
+    setItem("user");
+    setItem("token");
   };
 
   return (

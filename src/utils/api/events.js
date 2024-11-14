@@ -1,37 +1,51 @@
 import { instance } from "./instance/instance.js";
+import { getItem } from "../localStorage";
 const endpoint = "event";
-
+const images = [];
 const events = {
   getAll: function (add) {
     return instance.get(endpoint + add);
   },
-  getById: function (add) {
-    return instance.get(endpoint + add);
+  getById: function (add, id) {
+    return instance.post(
+      endpoint + add,
+      {
+        id: id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${getItem("token")}`,
+        },
+      },
+    );
   },
-  addEvent: function (event, add) {
-    instance({
-      method: "POST",
-      url: endpoint + add,
-      data: {
+  addEvent: function (add, event) {
+    images.push(event.imageEvent)
+    return instance.post(
+      endpoint + add,
+      {
         nameEvent: event.nameEvent,
         adressEvent: event.adressEvent,
         city: event.city,
         descriptionEvent: event.descriptionEvent,
-        eventType: event.eventType,
-        imageEvent: event.imageEvent,
+        eventType: "SPORT",
+        imageEvent: images,
         eventDate: event.eventDate,
         eventTime: event.eventTime,
         saleStartDate: event.saleStartDate,
         saleStartTime: event.saleStartTime,
-        locality: event.locality,
-        capacityMax: event.capacityMax,
-        capacity: event.capacity,
-        comments: event.comments,
-        stateEvent: event.stateEvent,
+        locality: null,
+        capacityMax: Number(event.capacityMax),
+        capacity: Number(event.capacity),
+        comments: [],
+        stateEvent: "ASSET",
       },
-    }).catch((error) => {
-      console.error(error);
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${getItem("token")}`,
+        },
+      },
+    );
   },
   deleteEvent: function (add, id) {
     return instance({
@@ -40,24 +54,32 @@ const events = {
     });
   },
   editEvent: function (add, updateEvent) {
-    return instance.put(endpoint + add, {
-      nameEvent: updateEvent.nameEvent,
-      adressEvent: updateEvent.adressEvent,
-      city: updateEvent.city,
-      descriptionEvent: updateEvent.descriptionEvent,
-      eventType: updateEvent.eventType,
-      imageEvent: updateEvent.imageEvent,
-      eventDate: updateEvent.eventDate,
-      eventTime: updateEvent.eventTime,
-      saleStartDate: updateEvent.saleStartDate,
-      saleStartTime: updateEvent.saleStartTime,
-      locality: updateEvent.locality,
-      capacityMax: updateEvent.capacityMax,
-      capacity: updateEvent.capacity,
-      comments: updateEvent.comments,
-      stateEvent: updateEvent.stateEvent,
-      id: updateEvent.id,
-    });
+    return instance.put(
+      endpoint + add,
+      {
+        nameEvent: updateEvent.nameEvent,
+        adressEvent: updateEvent.adressEvent,
+        city: updateEvent.city,
+        descriptionEvent: updateEvent.descriptionEvent,
+        eventType: updateEvent.eventType,
+        imageEvent: updateEvent.imageEvent,
+        eventDate: updateEvent.eventDate,
+        eventTime: updateEvent.eventTime,
+        saleStartDate: updateEvent.saleStartDate,
+        saleStartTime: updateEvent.saleStartTime,
+        locality: updateEvent.locality,
+        capacityMax: updateEvent.capacityMax,
+        capacity: updateEvent.capacity,
+        comments: updateEvent.comments,
+        stateEvent: updateEvent.stateEvent,
+        id: updateEvent.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${getItem("token")}`,
+        },
+      },
+    );
   },
   findByName: function (add, nameEvent) {
     return instance.get(endpoint + add + "/" + nameEvent);
@@ -65,5 +87,20 @@ const events = {
   findByCity: function (add) {
     return instance.get(endpoint + add);
   },
+  addComment: function (add, idEvent, comment) {
+    return instance.post(
+      endpoint + add,
+      {
+        idEvent: idEvent,
+        comment: comment,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${getItem("token")}`,
+        },
+      },
+    );
+  },
 };
+
 export { events };
